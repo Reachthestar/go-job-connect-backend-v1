@@ -36,7 +36,7 @@ func createTables() {
     	profileImage TEXT,
     	companyName TEXT UNIQUE,
     	companyDescription TEXT,
-    	isActive INTEGER NOT NULL DEFAULT 1 ,
+    	isActive INTEGER NOT NULL DEFAULT 1,
 		createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     	role TEXT CHECK( role IN ('SEEKER', 'COMPANY') )  NOT NULL

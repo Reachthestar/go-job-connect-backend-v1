@@ -7,5 +7,6 @@ import (
 
 func UserRouter(server *gin.Engine) {
 	server.POST("/signup", users.Signup)
+	server.POST("/login", users.Login)
 	// server.GET("/me",users.GetMe)
 }
