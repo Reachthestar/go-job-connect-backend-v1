@@ -8,13 +8,13 @@ type User struct {
     LastName          string   `json:"lastName"`
     Email             string   `json:"email"`
     Password          string   `json:"password"`
-    Phone             string   `json:"phone"`
-    Province          string   `json:"province"`
-    City              string   `json:"city"`
-    JobTitle          string   `json:"jobTitle"`
-    ProfileImage      string   `json:"profileImage"`
-    CompanyName       string   `json:"companyName"`
-    CompanyDescription string  `json:"companyDescription"`
+    Phone             *string   `json:"phone"`
+    Province          *string   `json:"province"`
+    City              *string   `json:"city"`
+    JobTitle          *string   `json:"jobTitle"`
+    ProfileImage      *string   `json:"profileImage"`
+    CompanyName       *string   `json:"companyName"`
+    CompanyDescription *string  `json:"companyDescription"`
     IsActive          int       `json:"isActive"`
 	CreatedAt		time.Time   `json:"createdAt"`
 	UpdatedAt     	time.Time   `json:"updatedAt"`
