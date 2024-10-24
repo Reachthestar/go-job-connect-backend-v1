@@ -7,7 +7,6 @@ import (
 	"github.com/Reachthestar/go-job-connect-backend/pkg/databases"
 )
 
-var jobs = []Job{}
 
 func (j *Job)Save() error{
 

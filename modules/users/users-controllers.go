@@ -1,7 +1,6 @@
 package users
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -27,16 +26,6 @@ func Signup(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"message":"Could not save user."})
 		return
 	}
-
-	//Convert the User struct to JSON format
-    userJSON, err := json.Marshal(user)
-    if err != nil {
-        context.JSON(http.StatusInternalServerError, gin.H{"message": "Error converting user to JSON."})
-        return
-    }
-
-    // Print JSON to console
-    fmt.Println(string(userJSON))
 
 	context.JSON(http.StatusCreated, gin.H{"message":"User created successfully","user":user})
 }
@@ -69,7 +58,4 @@ func Login(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"message":"Login successfully", "token":token})	
 }
 
-// func GetMe(context *gin.Context){
 
-// 	context.JSON(http.StatusOK, gin.H{"message":"it is working!"})
-// }
