@@ -51,3 +51,30 @@ func (j *Job)Save() error{
 	fmt.Println(j.ID)
 	return err
 }
+
+func GetJobByID(id int64) (*Job, error){
+ query := "SELECT * FROM jobs WHERE id = ?" 
+ row := databases.DB.QueryRow(query, id)
+
+ 	var j Job
+	 err := row.Scan(&j.ID, &j.Description, &j.Qualification, &j.Title, &j.Position, &j.Type, &j.Province, &j.City, &j.SalaryMin, &j.SalaryMax, &j.CreatedAt, &j.UpdatedAt, &j.UserID)
+	if err != nil {
+	return nil,err 
+}	
+
+	return &j,nil 
+}
+
+func (j Job) DeleteJob() error{
+	query := "DELETE FROM jobs WHERE id = ?"
+
+	stmt, err := databases.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec(j.ID)
+	return err
+}

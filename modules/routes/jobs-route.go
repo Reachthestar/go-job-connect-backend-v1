@@ -10,5 +10,5 @@ func JobRouter(server *gin.Engine) {
 	authenticated := server.Group("/")
 	authenticated.Use(middlewares.Authenticate)
 	authenticated.POST("/jobs/createJob", jobs.CreateJob)
-	authenticated.DELETE("/jobs/:id", )
+	authenticated.DELETE("/jobs/:id", jobs.DeleteJob)
 }
