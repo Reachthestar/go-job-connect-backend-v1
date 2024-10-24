@@ -10,6 +10,7 @@ func main() {
 	databases.InitDB()
 	server := gin.Default()
 	routes.UserRouter(server)
+	routes.JobRouter(server)
 	server.Run(":8080")
 }
 

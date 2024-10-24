@@ -59,8 +59,8 @@ func createTables() {
     	city TEXT CHECK(length(city) <= 50),
     	salaryMin TEXT CHECK(length(salaryMin) <= 10),
     	salaryMax TEXT CHECK(length(salaryMax) <= 10),
-    	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     	userId INTEGER,
     	FOREIGN KEY (userId) REFERENCES users(id)
 		)`

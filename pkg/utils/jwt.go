@@ -28,7 +28,7 @@ func init() {
 func GenerateToken(email string, userId int64) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": email,
-		"UserId": userId,
+		"userId": userId,
 		"exp": time.Now().Add(time.Hour * 10).Unix(),
 	})
 
@@ -47,7 +47,7 @@ func VerifyToken(token string) (int64,error){
 	})	
 
 		if err != nil {
-		return 0, errors.New("Could not parse token.")
+		return 0, fmt.Errorf("could not parse token: %v", err)
 	}
 
 	isTokenValid := parsedToken.Valid
@@ -59,11 +59,17 @@ func VerifyToken(token string) (int64,error){
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 
 	if !ok {
-		errors.New("Invalid token claims")
+		return 0, errors.New("invalid token claims")
 	}
 
-	userId := int64(claims["userId"].(float64))
-	fmt.Println("userId from JWT", userId)
+
+    userIdFloat, ok := claims["userId"].(float64)
+    if !ok {
+        return 0, errors.New("invalid userId in token claims")
+    }
+
+    userId := int64(userIdFloat)
+    fmt.Println("userId from JWT:", userId)
 
 	return userId, nil
 }

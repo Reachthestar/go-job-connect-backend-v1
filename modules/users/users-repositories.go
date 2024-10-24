@@ -56,12 +56,9 @@ func (u *User) Save() error{
 }
 
 func (u *User) ValidateCredentials() error{
-	// Validate login data
-	if u.Email == "" {
-        return errors.New("Email is required")
-    }
-    if u.Password == "" {
-        return errors.New("Password is required")
+	// Validate email or password
+	if u.Email == "" || u.Password == "" {
+        return errors.New("email and password are required")
     }
 
 	query := "SELECT id, password FROM users WHERE email = ?"
@@ -83,3 +80,18 @@ func (u *User) ValidateCredentials() error{
 
 	return nil
 }
+
+func GetUserByID(userId int64) (*User, error){
+	var user User
+
+	query := "SELECT id, firstName, lastName, email, phone, province, city, jobTitle, profileImage, companyName, companyDescription, isActive, createdAt, updatedAt, role FROM users WHERE id = ?"
+
+	row := databases.DB.QueryRow(query, userId)
+	err := row.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.Phone, &user.Province, &user.City, &user.JobTitle, &user.ProfileImage, &user.CompanyName, &user.CompanyDescription, &user.IsActive, &user.CreatedAt, &user.UpdatedAt, &user.Role)
+	if err != nil {
+	return nil,err 
+}
+
+return &user, nil
+}
+
